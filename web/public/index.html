@@ -4,6 +4,7 @@
         <script>
             let values = []
             let valuesAutoIncrementIndex = 0
+            let url = "http://localhost:8083/api/push"
             
             
             function getElementToAdd(index) {
@@ -17,7 +18,9 @@
                 });
 
                 // TODO push on API server
-                alert(JSON.stringify(body))
+                let http = new XMLHttpRequest()
+                http.open("POST", url)
+                http.send(JSON.stringify(body))
             }
 
             function addNewValue() {
