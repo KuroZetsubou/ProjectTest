@@ -7,12 +7,17 @@ This is an entry test for Algorab.
 ## Requirements
 
 * Windows, Linux (any distro should work fine) or macOS
-* MongoDB
-* Python
-* RabbitMQ
+* Docker
 
-## Install
+## How to run
 
+### ⚠️ WARNING: Make sure that port 3000 and port 8083 are **NOT** used 
+
+Run those two commands
+
+```sh
+docker build -t test .
+docker run -p 3000:3000 -p 8083:8083 test
 ```
-python -m pip install -r requirements
-```
+
+Open on your browser the following link: http://localhost:3000/
