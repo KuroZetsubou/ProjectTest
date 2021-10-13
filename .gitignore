@@ -1,3 +1,7 @@
 # macOS hidden files
 
 *.DS_Store
+
+# Python cache files
+
+*__pycache__*
