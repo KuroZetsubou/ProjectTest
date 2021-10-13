@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Web UI</title>
+        <script>
+            let values = []
+            let valuesAutoIncrementIndex = 0
+            
+            
+            function getElementToAdd(index) {
+                return '<div id="container' + index + '"><input type="number" id="value' + index + '" min="0"/><button type="button" onclick="removeValue(' + index + ')">Remove</button><br/></div>'
+            }
+
+            function push() {
+                body = []
+                values.forEach(valueIndex => {
+                    body.push({id: Number(valueIndex.replace("value", "")), value: Number(document.getElementById(valueIndex).value)})
+                });
+
+                // TODO push on API server
+                alert(JSON.stringify(body))
+            }
+
+            function addNewValue() {
+                values.push("value" + (++valuesAutoIncrementIndex).toString())
+                document.getElementById("values").innerHTML += getElementToAdd(valuesAutoIncrementIndex)
+            }
+
+            function removeValue(index) {
+                values.splice(values.indexOf("value" + index), 1)
+                document.getElementById("container" + index).remove()
+            }
+        </script>
+    </head>
+    <body onload="addNewValue()">
+        <div align="center">
+            <div id="values">
+            </div>
+            <br/><br/>
+            <button type="button" onclick="addNewValue()">Add new value.</button>
+            <br/><br/>
+            <button type="button" onclick="push()">Submit values.</button>
+        </div>
+    </body>
+</html>
