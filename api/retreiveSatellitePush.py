@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+# Base source code: https://www.rabbitmq.com/tutorials/tutorial-one-python.html
+
 import pika, sys, os
 import json
 import config
@@ -6,8 +9,10 @@ from lib.mongo import MongoConnectionConfig, MongoConnection
 
 def main():
 
+    # MongoDB connection
     db = MongoConnection(config=MongoConnectionConfig)
 
+    # RabbitMQ connection parameters
     parameters = pika.ConnectionParameters()
     parameters.host = config.RABBITMQ_HOST
     parameters.port = config.RABBITMQ_PORT
@@ -16,10 +21,12 @@ def main():
         password=config.RABBITMQ_PASS
     )
 
+    # Preparing connection and initialize the queue
     connection = pika.BlockingConnection(parameters=parameters)
     channel = connection.channel()
     channel.queue_declare(queue=config.RABBITMQ_QUEUE_NAME_PUSH)
 
+    # Callback function onReceive
     def callback(ch, method, properties, body):
         print(" [x] Received %r" % body)
 
@@ -32,6 +39,7 @@ def main():
             return
 
         db.updateMessage(id=data['idMessage'], idReference=data['idReference'], referenceDateTime=data['referenceDateTime'])
+        pass
 
     channel.basic_consume(queue=config.RABBITMQ_QUEUE_NAME_PUSH, on_message_callback=callback, auto_ack=True)
 

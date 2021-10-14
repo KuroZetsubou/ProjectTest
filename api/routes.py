@@ -19,6 +19,7 @@ from lib.mongo import MongoConnection, MongoConnectionConfig
 # MongoDB connection
 db = MongoConnection(MongoConnectionConfig)
 # RabbitMQ connection
+# Base source code: https://www.rabbitmq.com/tutorials/tutorial-one-python.html
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host=config.RABBITMQ_HOST, 
                                 port=config.RABBITMQ_PORT, 

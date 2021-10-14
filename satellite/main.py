@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+# Base source code: https://www.rabbitmq.com/tutorials/tutorial-one-python.html
+
 import pika, sys, os
 import json
 import config
