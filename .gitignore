@@ -5,3 +5,7 @@
 # Python cache files
 
 *__pycache__*
+
+# Local config
+
+*/config.py.edit

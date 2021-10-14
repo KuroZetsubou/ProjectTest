@@ -1,7 +1,13 @@
 #!/bin/sh
 rabbitmq-server -detached
-screen -dm -xS webserver serve web/public -p 3000
-screen -dm -xS apiserver python3 api/main.py
-screen -dm -xS apiserver_broker python3 api/retreiveSatellitePush.py
-screen -dm -xS satellite python3 satellite/main.py
+sleep 2
+screen -dm serve web/public -p 3000
+sleep 2
+screen -dm python3 api/main.py
+sleep 2
+screen -dm python3 satellite/main.py
+sleep 2
+screen -dm python3 api/retreiveSatellitePush.py
+sleep 2
 mongod --bind_ip 0.0.0.0
+#screen -dmS webserver serve web/public -p 3000
