@@ -59,7 +59,7 @@ class MongoConnection:
         except:
             print("already initialized")
 
-    # Returns the last autoincrement id 
+    # Returns the last autoincrement id
     def getLastAutoincrementId(self) -> int:
         data = self.directGetData("system_tb", "constants")
         return data['lastAutoincrementId']
@@ -74,11 +74,11 @@ class MongoConnection:
     # Update message collection with idReference and datetimes
     def updateMessage(self, id: int, idReference: int, referenceDateTime: int, updateDateTime: int = None):
         colle = self.db.get_collection('messages_tb')
-        colle.update_one({"idMessage": id}, {
+        colle.update_one({"idMessage": id}, {"$set": {
             "idReference": idReference,
             "referenceDateTime": referenceDateTime,
             "updateDateTime": updateDateTime if updateDateTime else int(time())
-        })
+        }})
 
     # Adds a message on database and returns the generated ID
     def addMessage(self, message: str, id: int = None, idReference: int = None, referenceDateTime: int = None, createDateTime: int = None, updateDateTime: int = None) -> int:
