@@ -2,6 +2,8 @@
 
 This is an entry test for Algorab.
 
+![project schema](assets/schema.svg "Schema")
+
 ## Requirements
 
 * Windows, Linux (any distro should work fine) or macOS
