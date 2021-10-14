@@ -2,8 +2,6 @@
 
 This is an entry test for Algorab.
 
-## **NOTE: The documentation about requirements and installation right now are incomplete, those are subject to change during the development.** 
-
 ## Requirements
 
 * Windows, Linux (any distro should work fine) or macOS
@@ -11,7 +9,7 @@ This is an entry test for Algorab.
 
 ## How to run
 
-### ⚠️ WARNING: Make sure that port 3000 and port 8083 are **NOT** used 
+### ⚠️ WARNING: Make sure that port 3000 and port 8083 are **NOT** used and your local MongoDB server is either using a different port or disabled
 
 Run those two commands
 
