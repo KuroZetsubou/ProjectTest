@@ -1,6 +1,5 @@
 # base imports
-import os
-import hashlib
+import pika
 import json as _json
 from wsgiref.handlers import format_date_time
 from datetime import datetime
@@ -17,7 +16,19 @@ import config
 # Lib import
 from lib.mongo import MongoConnection, MongoConnectionConfig
 
+# MongoDB connection
 db = MongoConnection(MongoConnectionConfig)
+# RabbitMQ connection
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(host=config.RABBITMQ_HOST, 
+                                port=config.RABBITMQ_PORT, 
+                                credentials=pika.PlainCredentials(
+                                    username=config.RABBITMQ_USER, 
+                                    password=config.RABBITMQ_PASS)
+                            )
+                        )
+channel = connection.channel()
+channel.queue_declare(queue=config.RABBITMQ_QUEUE_NAME_PULL)
 
 async def test(request):
     return json({"hello": "world"})
@@ -43,7 +54,7 @@ async def pushData(request: sanic.Request):
         bodyForSatellite["value"] += entry["value"]
 
     print(bodyForSatellite)
-    # TODO communicate with RabbitMQ
+    channel.basic_publish(exchange='', routing_key=config.RABBITMQ_QUEUE_NAME_PULL, body=_json.dumps(bodyForSatellite))
 
     # return ok status
     return text("ok")
