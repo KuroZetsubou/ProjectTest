@@ -11,4 +11,13 @@ SANIC_PORT = 8083
 SANIC_DEBUG = True
 
 # RabbitMQ configuration
-# Coming soon :tm:
+
+RABBITMQ_HOST = '10.211.55.3'
+RABBITMQ_PORT = 5672
+# please edit the credentials with yours
+RABBITMQ_USER = "admin"
+RABBITMQ_PASS = "admin"
+# This declares the name of the queue for retreiving data from API service
+RABBITMQ_QUEUE_NAME_PULL = "satellite_pull"
+# This declares the name of the queue for pushing back the data to the API service
+RABBITMQ_QUEUE_NAME_PUSH = "satellite_push"
