@@ -43,7 +43,7 @@ RUN mkdir /data
 RUN mkdir /data/db
 
 RUN python3 -m pip install wheel
-RUN python3 -m pip install -r requirements.txt
+RUN python3 -m pip install pymongo sanic pika
 
 WORKDIR /app
 COPY . .

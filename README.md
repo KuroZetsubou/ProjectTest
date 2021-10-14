@@ -17,7 +17,7 @@ Run those two commands
 
 ```sh
 docker build -t test .
-docker run -p 3000:3000 -p 8083:8083 test
+docker run -p 3000:3000 -p 8083:8083 -p 27017:27017 test
 ```
 
 Open on your browser the following link: http://localhost:3000/
